@@ -1,5 +1,4 @@
 import telebot
-
 import camelot
 
 tables = camelot.read_pdf('horario.pdf')
