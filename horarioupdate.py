@@ -12,4 +12,5 @@ def main():
 
     print("writing json file")
     tables[0].to_json('horario.json')
+    
 #adicionar timestamp para ver ultimo update ao source file
