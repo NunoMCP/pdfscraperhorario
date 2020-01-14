@@ -14,7 +14,7 @@ def weekday_switch(argument):
 
 def versionCheck():
     timeStamp = datetime.fromtimestamp(os.path.getmtime("horario.json")).strftime("%Y-%m-%d %H:%M")
-    return "A última atualização do ficheiro foi desde: *" + timeStamp + "*"
+    return "A última atualização do ficheiro foi desde: <b>" + timeStamp + "</b>"
 
 def main():
     with open("horario.json") as file:
@@ -39,7 +39,7 @@ def main():
             if data[current_hour][current_date] == "":
                 finalString = "Não estás a ter aulas neste momento."
             else:
-                finalString = "A aula é: *" + data[current_hour][current_date] + "* e a sala é: *" + data[current_hour][str(current_room)] + "*"
+                finalString = "A aula é: <b>" + data[current_hour][current_date] + "</b> e a sala é: <b>" + data[current_hour][str(current_room)] + "</b>"
                 print(data[current_hour][current_date])
                 print(data[current_hour][str(current_room)])
         else:
