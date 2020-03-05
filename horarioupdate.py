@@ -3,7 +3,7 @@ import camelot
 
 def main():
     print("downloading pdf")
-    url = "http://my.istec.pt/wp-content/uploads/2019/11/3-MUL-D.pdf"
+    url = "http://my.istec.pt/wp-content/uploads/2020/03/LEM-3-L.pdf"
     ficheiro = requests.get(url)
 
     print("scanning pdf")
@@ -12,5 +12,6 @@ def main():
 
     print("writing json file")
     tables[0].to_json('horario.json')
+    tables[1].to_json('horario_sabado.json')
     
 #adicionar timestamp para ver ultimo update ao source file
