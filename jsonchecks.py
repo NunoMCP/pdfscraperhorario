@@ -9,31 +9,43 @@ def weekday_switch(argument):
         1: "Ter.",
         2: "Qua.",
         3: "Qui.",
-        4: "Sex."
+        4: "Sex.",
     }
     return switch.get(argument)
-
-#verifica a ultima data de atualizacao do pdf source
-def versionCheck():
-    timeStamp = datetime.fromtimestamp(os.path.getmtime("horario.json")).strftime("%Y-%m-%d %H:%M")
-    return "A última atualização do ficheiro foi desde: <b>" + timeStamp + "</b>"
-
 #
 def main():
-    with open("horario.json") as file:
-        data = json.load(file)
-    
-    current_weekday = weekday_switch(datetime.now().weekday())
-    
-    for i in data[0]:
-        if data[0][str(i)] == current_weekday:
-            current_date = str(i)
-            break
-        else:
-            current_date = 5
+    #verifica se é sabado ou nao e abre o ficheiro correspondente
+    if datetime.now().weekday() == 5:
+        current_date = 5
+        with open("horario_sabado.json") as file:
+            data = json.load(file)
+    else:
+        with open("horario.json") as file:
+            data = json.load(file)
+        for i in data[0]:
+            if data[0][str(i)] == weekday_switch(datetime.now().weekday()):
+                current_date = str(i)
+                break
+            else:
+                current_date = 6
 
+    #verificar se é sábado
+    if current_date == 5:
+        current_hour = int(datetime.now().strftime("%H")) - 7
+        if current_hour >= 1 and current_hour <= 7:
+            current_date = "1"
+            current_room = "2"
+            if data[current_hour][current_date] == "":
+                finalString = "Não estás a ter aulas neste momento."
+                return finalString
+            else:
+                finalString = "A aula é: <b>" + data[current_hour][current_date] + "</b> e a sala é: <b>" + data[current_hour][str(current_room)] + "</b>"
+                return finalString
+        else:
+            finalString = "Só há aulas das 8h às 15h aos sábados."
+            return finalString
     #verificar se dia da semana 
-    if current_date != 5:
+    elif current_date != 6:
         current_hour = int(datetime.now().strftime("%H")) - 7
         if current_hour >= 1 and current_hour <= 10:
             current_room = int(current_date) + 1
@@ -41,11 +53,10 @@ def main():
                 finalString = "Não estás a ter aulas neste momento."
             else:
                 finalString = "A aula é: <b>" + data[current_hour][current_date] + "</b> e a sala é: <b>" + data[current_hour][str(current_room)] + "</b>"
-                print(data[current_hour][current_date])
-                print(data[current_hour][str(current_room)])
+
         else:
-            finalString = "Só há aulas das 8h às 18h."
+            finalString = "Só há aulas das 8h às 18h em dias de semana."
         return finalString
     else:
-        finalString = "Não há aulas ao fim de semana."
+        finalString = "Não há aulas ao domingo."
         return finalString
