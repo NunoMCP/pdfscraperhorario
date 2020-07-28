@@ -18,7 +18,7 @@ def send_update(message):
 def send_get(message):
     finalValue = jsonchecks.main()
     bot.send_message(chat_id=message.chat.id, text=finalValue, parse_mode='HTML')
-    bot.send_message(chat_id=message.chat.id, text="A última atualização do ficheiro foi desde: <b>" + datetime.fromtimestamp(os.path.getmtime("horario.json")).strftime("%Y-%m-%d %H:%M") + "</b>", parse_mode='HTML')
+    bot.send_message(chat_id=message.chat.id, text="A última atualização do ficheiro foi desde: <b>" + datetime.fromtimestamp(os.path.getmtime("horario.json")).strftime("%d/%m/%Y %H:%M") + "</b>", parse_mode='HTML')
 
 #este comando é para ficar atento aos inputs do utilizador
 print("Running")

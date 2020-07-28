@@ -4,7 +4,12 @@ import camelot
 def main():
     #obter ficheiro do servidor e fazer download para local
     print("downloading pdf")
+    # horário Eng. Multi. 3º ano - 2ºsemestre
     url = "http://my.istec.pt/wp-content/uploads/2020/03/LEM-3-L.pdf"
+    # horário Inf. 2º ano - 2º semestre
+    # url = "http://my.istec.pt/wp-content/uploads/2020/03/LINF-2-L-1.pdf"
+    # horário CTESP Redes e Sistemas Informáticos - 1º semestre
+    # url = "http://my.istec.pt/wp-content/uploads/2020/06/Turma-A-2.pdf"
     ficheiro = requests.get(url)
 
     #abrir ficheiro local e escrever conteudos para variavel
